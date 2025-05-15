@@ -1,0 +1,157 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.artContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Background art with blur effect - increased blur */
+.backgroundArt {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  right: -20%;
+  bottom: -20%;
+  background-size: 100% 100%;
+  filter: blur(35px);
+  opacity: 0.7;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+
+.topBackgroundLayer {
+  z-index: 2;
+}
+
+.bottomBackgroundLayer {
+  z-index: 1;
+  opacity: 0;
+}
+
+.transitioning .topBackgroundLayer {
+  opacity: 1;
+}
+
+.transitioning .bottomBackgroundLayer {
+  opacity: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 75vw;
+  height: 48.4vw;
+  max-width: 1150px;
+  max-height: 741.9px;
+  z-index: 10;
+  transition: transform 0.5s ease;
+  transform-origin: center;
+}
+
+.imageLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease;
+}
+
+.albumImage {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.topLayer {
+  z-index: 2;
+  opacity: 1;
+}
+
+.bottomLayer {
+  z-index: 1;
+  opacity: 0;
+}
+
+.transitioning .topLayer {
+  opacity: 1;
+}
+
+.transitioning .bottomLayer {
+  opacity: 0;
+}
+
+/* Zoom animation styles */
+.zooming {
+  transition: transform 12s ease;
+}
+
+.quadrant1 {
+  transform: scale(1.8) translate(12%, 18.6%);
+}
+
+.quadrant2 {
+  transform: scale(1.8) translate(-12%, 18.6%);
+}
+
+.quadrant3 {
+  transform: scale(1.8) translate(-12%, -18.6%);
+}
+
+.quadrant4 {
+  transform: scale(1.8) translate(12%, -18.6%);
+}
+
+@media (max-width: 768px) {
+  .imageWrapper {
+    width: 85vw;
+    height: 54.8vw;
+  }
+  
+  .quadrant1, .quadrant2, .quadrant3, .quadrant4 {
+    transform-origin: center;
+    transform: scale(1.7);
+  }
+  
+  .quadrant1 {
+    transform: scale(1.7) translate(11%, 17%);
+  }
+  
+  .quadrant2 {
+    transform: scale(1.7) translate(-11%, 17%);
+  }
+  
+  .quadrant3 {
+    transform: scale(1.7) translate(-11%, -17%);
+  }
+  
+  .quadrant4 {
+    transform: scale(1.7) translate(11%, -17%);
+  }
+}
+
+/* Add canvas styles */
+#mesh-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}

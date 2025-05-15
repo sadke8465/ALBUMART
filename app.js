@@ -279,3 +279,53 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(animateQuadrants, i * 12000);
     }
   }
+  
+  // Initialize with first album
+  function initialize() {
+    setupMeshGradient();
+    
+    // Start with a random album
+    const randomIndex = Math.floor(Math.random() * SAMPLE_ALBUMS.length);
+    const firstAlbum = SAMPLE_ALBUMS[randomIndex];
+    
+    addNewTrack(
+      firstAlbum.title, 
+      firstAlbum.artist, 
+      firstAlbum.imageUrl
+    );
+    
+    // Start automatic album rotation
+    setInterval(() => {
+      const nextIndex = Math.floor(Math.random() * SAMPLE_ALBUMS.length);
+      const nextAlbum = SAMPLE_ALBUMS[nextIndex];
+      
+      addNewTrack(
+        nextAlbum.title,
+        nextAlbum.artist,
+        nextAlbum.imageUrl
+      );
+    }, 60000); // Switch every 60 seconds
+    
+    // Trigger initial zoom animation after 2 seconds
+    setTimeout(() => {
+      startZoomAnimation();
+    }, 2000);
+    
+    // Set up auto-zoom every 2 minutes
+    setInterval(() => {
+      if (!zoomActive) {
+        startZoomAnimation();
+      }
+    }, 120000);
+  }
+  
+  // 'A' key press triggers zoom animation
+  document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'a' && !zoomActive) {
+      startZoomAnimation();
+    }
+  });
+  
+  // Start everything
+  initialize();
+});
